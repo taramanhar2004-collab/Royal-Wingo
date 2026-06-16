@@ -881,3 +881,51 @@
 </script>
 </body>
 </html>
+local elevator = script.Parent
+local sound = elevator:WaitForChild("ElevatorSound")
+local TweenService = game:GetService("TweenService")
+
+local upPosition = Vector3.new(0, 20, 0)
+local downPosition = Vector3.new(0, 0, 0)
+
+while true do
+	sound:Play()
+
+	local tweenUp = TweenService:Create(
+		elevator,
+		TweenInfo.new(5),
+		{Position = upPosition}
+	)
+	tweenUp:Play()
+	tweenUp.Completed:Wait()
+
+	sound:Stop()
+	wait(2)
+
+	sound:Play()
+
+	local tweenDown = TweenService:Create(
+		elevator,
+		TweenInfo.new(5),
+		{Position = downPosition}
+	)
+	tweenDown:Play()
+	tweenDown.Completed:Wait()
+
+	sound:Stop()
+	wait(2)
+end
+local elevator = script.Parent
+
+elevator.Color = Color3.fromRGB(255, 0, 0) -- Red
+while true do
+    elevator.Color = Color3.fromRGB(0, 255, 0) -- Green
+
+    sound:Play()
+    -- Up movement code
+
+    elevator.Color = Color3.fromRGB(255, 0, 0) -- Red
+
+    sound:Play()
+    -- Down movement code
+end
