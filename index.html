@@ -83,7 +83,10 @@
         .promo-scroller-inner { display: flex; gap: 10px; padding: 2px 0; }
         .promo-scroller-item { flex: 0 0 85%; max-width: 320px; }
         .promo-scroller-item img { width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border-color); display: block; }
-
+<div class="game-card" onclick="window.location.href='elevator.html'">
+    <div class="game-icon">🛗</div>
+    <div class="game-title">Elevator</div>
+</div>
         /* --- Wallet Page --- */
         .wallet-summary { background-color: var(--bg-secondary); padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 20px; }
         .wallet-summary .balance { font-size: 2.5em; font-weight: 700; margin: 5px 0 20px 0; }
@@ -789,7 +792,7 @@
         if (spinBtn.dataset.listener) return; spinBtn.dataset.listener = true;
         spinBtn.addEventListener('click', async () => {
             const betAmount = parseFloat(betAmountInput.value);
-            if (isNaN(betAmount) || betAmount <= 0) { alert('Please enter a valid bet amount.'); return; }
+        if (isNaN(betAmount) || betAmount <= 0) { alert('Please enter a valid bet amount.'); return; }
             if (betAmount > currentBalance) { alert('Insufficient balance.'); return; }
             spinBtn.disabled = true; spinBtn.textContent = 'Spinning...';
             const { committed } = await updateBalance(-betAmount, 'Hotline Bet');
@@ -880,9 +883,6 @@
     }
 </script>
 </body>
-</html>
-<!DOCTYPE html>
-<html>
 <head>
 <style>
 #elevator{
@@ -925,3 +925,4 @@ setInterval(() => {
 
 </body>
 </html>
+<audio id="liftSound" src="elevator.mp3"></audio>
