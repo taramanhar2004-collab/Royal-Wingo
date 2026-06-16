@@ -881,51 +881,47 @@
 </script>
 </body>
 </html>
-local elevator = script.Parent
-local sound = elevator:WaitForChild("ElevatorSound")
-local TweenService = game:GetService("TweenService")
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#elevator{
+  width:100px;
+  height:100px;
+  background:red;
+  position:absolute;
+  left:100px;
+  top:300px;
+  transition:top 5s;
+}
+</style>
+</head>
+<body>
 
-local upPosition = Vector3.new(0, 20, 0)
-local downPosition = Vector3.new(0, 0, 0)
+<div id="elevator"></div>
 
-while true do
-	sound:Play()
+<audio id="liftSound" src="elevator.mp3"></audio>
 
-	local tweenUp = TweenService:Create(
-		elevator,
-		TweenInfo.new(5),
-		{Position = upPosition}
-	)
-	tweenUp:Play()
-	tweenUp.Completed:Wait()
+<script>
+const elevator = document.getElementById("elevator");
+const sound = document.getElementById("liftSound");
 
-	sound:Stop()
-	wait(2)
+let up = false;
 
-	sound:Play()
+setInterval(() => {
+    sound.play();
 
-	local tweenDown = TweenService:Create(
-		elevator,
-		TweenInfo.new(5),
-		{Position = downPosition}
-	)
-	tweenDown:Play()
-	tweenDown.Completed:Wait()
+    if(up){
+        elevator.style.top = "300px";
+        elevator.style.background = "red";
+    } else {
+        elevator.style.top = "100px";
+        elevator.style.background = "green";
+    }
 
-	sound:Stop()
-	wait(2)
-end
-local elevator = script.Parent
+    up = !up;
+}, 5000);
+</script>
 
-elevator.Color = Color3.fromRGB(255, 0, 0) -- Red
-while true do
-    elevator.Color = Color3.fromRGB(0, 255, 0) -- Green
-
-    sound:Play()
-    -- Up movement code
-
-    elevator.Color = Color3.fromRGB(255, 0, 0) -- Red
-
-    sound:Play()
-    -- Down movement code
-end
+</body>
+</html>
