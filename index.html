@@ -897,32 +897,87 @@
 </style>
 </head>
 <body>
+    
+<meta charset="UTF-8">
+<title>Elevator Game</title>
+<style>
+body{
+    background:#111;
+    color:white;
+    text-align:center;
+    font-family:Arial;
+}
 
-<div id="elevator"></div>
+#building{
+    width:200px;
+    height:500px;
+    border:3px solid white;
+    margin:20px auto;
+    position:relative;
+}
 
-<audio id="liftSound" src="elevator.mp3"></audio>
+#elevator{
+    width:80px;
+    height:80px;
+    background:red;
+    position:absolute;
+    left:60px;
+    bottom:0;
+    transition:bottom 1s;
+}
+
+button{
+    padding:12px 25px;
+    font-size:18px;
+    margin:10px;
+}
+</style>
+</head>
+<body>
+
+<h1>🛗 Elevator Game</h1>
+
+<h2>Floor: <span id="floor">1</span></h2>
+<h2>Coins: <span id="coins">0</span></h2>
+
+<div id="building">
+    <div id="elevator"></div>
+</div>
+
+<button onclick="moveUp()">UP</button>
+<button onclick="cashOut()">Cash Out</button>
 
 <script>
-const elevator = document.getElementById("elevator");
-const sound = document.getElementById("liftSound");
+let floor = 1;
+let coins = 0;
 
-let up = false;
-
-setInterval(() => {
-    sound.play();
-
-    if(up){
-        elevator.style.top = "300px";
-        elevator.style.background = "red";
-    } else {
-        elevator.style.top = "100px";
-        elevator.style.background = "green";
+function moveUp(){
+    if(Math.random() < 0.2){
+        alert("💥 Elevator Crash! Game Over");
+        floor = 1;
+        coins = 0;
+        update();
+        return;
     }
 
-    up = !up;
-}, 5000);
+    floor++;
+    coins += 10;
+
+    document.getElementById("elevator").style.bottom =
+        ((floor - 1) * 40) + "px";
+
+    update();
+}
+
+function cashOut(){
+    alert("🏆 You collected " + coins + " coins!");
+}
+
+function update(){
+    document.getElementById("floor").innerText = floor;
+    document.getElementById("coins").innerText = coins;
+}
 </script>
 
 </body>
 </html>
-<audio id="liftSound" src="elevator.mp3"></audio>
